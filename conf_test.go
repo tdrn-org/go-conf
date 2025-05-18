@@ -55,6 +55,25 @@ func TestLookupUnknownConfiguration(t *testing.T) {
 	require.False(t, ok)
 }
 
+type TestLookupConfigurationOrDefaultConfig struct {
+	TestConfig
+}
+
+func (c *TestLookupConfigurationOrDefaultConfig) Bind() {
+	conf.BindConfiguration(c)
+}
+
+func TestLookupConfigurationOrDefault(t *testing.T) {
+	defaultConfiguration := &TestLookupConfigurationOrDefaultConfig{
+		TestConfig{
+			ConfigurationType: reflect.TypeFor[*TestLookupConfigurationOrDefaultConfig](),
+			StringValue:       "TestLookupConfigurationOrDefaultConfig",
+		},
+	}
+	configuration := conf.LookupConfigurationOrDefault[*TestLookupConfigurationOrDefaultConfig](defaultConfiguration)
+	require.Equal(t, defaultConfiguration, configuration)
+}
+
 type TestBindAndLookupConfigurationConfig struct {
 	TestConfig
 }
