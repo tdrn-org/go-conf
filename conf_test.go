@@ -9,8 +9,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/hdecarne-github/go-conf"
 	"github.com/stretchr/testify/require"
+	"github.com/tdrn-org/go-conf"
 )
 
 type TestTyped struct{}

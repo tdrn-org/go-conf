@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/hdecarne-github/go-conf"
+	"github.com/tdrn-org/go-conf"
 )
 
 // EchoService defines a simple service interface to echo messages in a [fmt.Print] style manner.

@@ -1,4 +1,4 @@
-module github.com/hdecarne-github/go-conf
+module github.com/tdrn-org/go-conf
 
 go 1.24
 

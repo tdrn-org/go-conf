@@ -8,9 +8,9 @@ package service_test
 import (
 	"testing"
 
-	"github.com/hdecarne-github/go-conf"
-	"github.com/hdecarne-github/go-conf/service"
 	"github.com/stretchr/testify/require"
+	"github.com/tdrn-org/go-conf"
+	"github.com/tdrn-org/go-conf/service"
 )
 
 func TestDefaultEchoService(t *testing.T) {
