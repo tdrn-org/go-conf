@@ -25,7 +25,7 @@ func (*stdoutEchoService) Type() reflect.Type {
 }
 
 func (*stdoutEchoService) Echo(a ...any) {
-	fmt.Print(a...)
+	_, _ = fmt.Print(a...)
 }
 
 var defaultEchoService *stdoutEchoService = &stdoutEchoService{}
