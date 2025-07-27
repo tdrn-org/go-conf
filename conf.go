@@ -45,7 +45,7 @@ type configurationTableEntry struct {
 	applys        []func(Configuration)
 }
 
-var configurationTable map[reflect.Type]configurationTableEntry = make(map[reflect.Type]configurationTableEntry)
+var configurationTable map[reflect.Type]*configurationTableEntry = make(map[reflect.Type]*configurationTableEntry)
 var configurationTableMutex sync.RWMutex = sync.RWMutex{}
 
 // BindConfiguration binds a [Configuration] instance to its type.
@@ -59,12 +59,11 @@ func BindConfiguration[C Configuration](configuration C) {
 	entry, ok := configurationTable[configurationType]
 	if ok {
 		entry.configuration = configuration
-		configurationTable[configurationType] = entry
 		for _, apply := range entry.applys {
 			apply(configuration)
 		}
 	} else {
-		entry = configurationTableEntry{
+		entry = &configurationTableEntry{
 			configuration: configuration,
 			applys:        make([]func(Configuration), 0),
 		}
@@ -83,7 +82,7 @@ func BindToConfiguration(configurationType reflect.Type, apply func(Configuratio
 		entry.applys = append(entry.applys, apply)
 		apply(entry.configuration)
 	} else {
-		entry = configurationTableEntry{
+		entry = &configurationTableEntry{
 			applys: []func(Configuration){apply},
 		}
 		configurationTable[configurationType] = entry
