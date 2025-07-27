@@ -1,3 +1,4 @@
+//
 // Copyright (C) 2024-2025 Holger de Carne
 //
 // This software may be modified and distributed under the terms
@@ -32,7 +33,7 @@ func Resolve[T Typed](typed Typed) T {
 	return typed.(T)
 }
 
-// Configuration represents bindable configuration instances.
+// Configuration represents a bindable configuration instances.
 type Configuration interface {
 	Typed
 	// Bind binds this instance to its type via [BindConfiguration].
@@ -58,6 +59,7 @@ func BindConfiguration[C Configuration](configuration C) {
 	entry, ok := configurationTable[configurationType]
 	if ok {
 		entry.configuration = configuration
+		configurationTable[configurationType] = entry
 		for _, apply := range entry.applys {
 			apply(configuration)
 		}
