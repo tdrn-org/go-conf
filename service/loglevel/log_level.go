@@ -4,7 +4,7 @@
 // This software may be modified and distributed under the terms
 // of the MIT license. See the LICENSE file for details.
 
-package service
+package loglevel
 
 import (
 	"log/slog"
@@ -13,10 +13,11 @@ import (
 	"github.com/tdrn-org/go-conf"
 )
 
-// LogLevelService is used to provide access to [slog.LevelVar] instance
-// controlling the active log level.
+// LogLevelService is used to provide access to a single [slog.LevelVar]
+// instance controlling the active log level.
 type LogLevelService interface {
 	conf.Service
+	// LevelVar gets the [slog.LevelVar] instance used to control the active log level
 	LevelVar() *slog.LevelVar
 }
 
@@ -30,6 +31,12 @@ func (*logLevelService) Type() reflect.Type {
 
 func (s *logLevelService) LevelVar() *slog.LevelVar {
 	return s.level
+}
+
+// LevelVar is shorthand for invoking [LogLevelService.LevelVar]
+func LevelVar() *slog.LevelVar {
+	logLevel, _ := conf.LookupService[LogLevelService]()
+	return logLevel.LevelVar()
 }
 
 func init() {

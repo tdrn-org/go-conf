@@ -4,19 +4,23 @@
 // This software may be modified and distributed under the terms
 // of the MIT license. See the LICENSE file for details.
 
-package service_test
+package echo_test
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
 	"github.com/tdrn-org/go-conf"
-	"github.com/tdrn-org/go-conf/service"
+	"github.com/tdrn-org/go-conf/service/echo"
 )
 
 func TestDefaultEchoService(t *testing.T) {
-	defaultEchoService := service.DefaultEchoService()
+	defaultEchoService := echo.DefaultEchoService()
 	echoService := conf.LookupServiceOrDefault(defaultEchoService)
 	require.Equal(t, defaultEchoService, echoService)
-	echoService.Echo("TestDefaultEchoService\n")
+}
+
+func TestEchoing(t *testing.T) {
+	echo.Out("out message\n")
+	echo.Err("err message\n")
 }

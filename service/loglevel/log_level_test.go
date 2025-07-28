@@ -4,7 +4,7 @@
 // This software may be modified and distributed under the terms
 // of the MIT license. See the LICENSE file for details.
 
-package service_test
+package loglevel_test
 
 import (
 	"log/slog"
@@ -12,11 +12,11 @@ import (
 
 	"github.com/stretchr/testify/require"
 	"github.com/tdrn-org/go-conf"
-	"github.com/tdrn-org/go-conf/service"
+	"github.com/tdrn-org/go-conf/service/loglevel"
 )
 
 func TestLogLevelService(t *testing.T) {
-	logLevel, ok := conf.LookupService[service.LogLevelService]()
+	logLevel, ok := conf.LookupService[loglevel.LogLevelService]()
 	require.True(t, ok)
 	require.NotNil(t, logLevel)
 	// Check default
@@ -25,8 +25,7 @@ func TestLogLevelService(t *testing.T) {
 	logLevel.LevelVar().Set(slog.LevelDebug)
 	require.Equal(t, slog.LevelDebug, logLevel.LevelVar().Level())
 	// Check value after re-lookup
-	logLevel, ok = conf.LookupService[service.LogLevelService]()
-	require.True(t, ok)
-	require.NotNil(t, logLevel)
-	require.Equal(t, slog.LevelDebug, logLevel.LevelVar().Level())
+	levelVar := loglevel.LevelVar()
+	require.NotNil(t, levelVar)
+	require.Equal(t, slog.LevelDebug, levelVar.Level())
 }
