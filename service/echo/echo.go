@@ -39,7 +39,7 @@ func (*stdoutEchoService) Err(a ...any) {
 
 var defaultEchoService *stdoutEchoService = &stdoutEchoService{}
 
-// DefaultEchoService gets the default [EchoService] simply wrapping [fmt.Print].
+// DefaultEchoService gets the default [EchoService] simply wrapping [fmt.Fprint].
 func DefaultEchoService() EchoService {
 	return defaultEchoService
 }
