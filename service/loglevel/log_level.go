@@ -17,7 +17,7 @@ import (
 // instance controlling the active log level.
 type LogLevelService interface {
 	conf.Service
-	// LevelVar gets the [slog.LevelVar] instance used to control the active log level
+	// LevelVar gets the [slog.LevelVar] instance used to control the active log level.
 	LevelVar() *slog.LevelVar
 }
 
@@ -33,7 +33,7 @@ func (s *logLevelService) LevelVar() *slog.LevelVar {
 	return s.level
 }
 
-// LevelVar is shorthand for invoking [LogLevelService.LevelVar]
+// LevelVar is shorthand for invoking LogLevelService.LevelVar.
 func LevelVar() *slog.LevelVar {
 	logLevel, _ := conf.LookupService[LogLevelService]()
 	return logLevel.LevelVar()

@@ -17,9 +17,9 @@ import (
 // EchoService mimics echoing messages to Stdout and Stderr in a [fmt.Print] style manner.
 type EchoService interface {
 	conf.Service
-	// Out echos a message to a Stdout like output using a [fmt.Print] style formating
+	// Out echos a message to a Stdout like output using a [fmt.Print] style formating.
 	Out(a ...any)
-	// Out echos a message to a Stderr like output using a [fmt.Print] style formating
+	// Out echos a message to a Stderr like output using a [fmt.Print] style formating.
 	Err(a ...any)
 }
 
@@ -44,12 +44,12 @@ func DefaultEchoService() EchoService {
 	return defaultEchoService
 }
 
-// Out is a shorthand for invoking [EchoService.Out].
+// Out is a shorthand for invoking EchoService.Out.
 func Out(a ...any) {
 	conf.LookupServiceOrDefault[EchoService](defaultEchoService).Out(a...)
 }
 
-// Err is a shorthand for invoking [EchoService.Err].
+// Err is a shorthand for invoking EchoService.Err.
 func Err(a ...any) {
 	conf.LookupServiceOrDefault[EchoService](defaultEchoService).Err(a...)
 }
