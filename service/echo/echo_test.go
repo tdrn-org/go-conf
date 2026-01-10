@@ -21,6 +21,8 @@ func TestDefaultEchoService(t *testing.T) {
 }
 
 func TestEchoing(t *testing.T) {
-	echo.Out("out message\n")
-	echo.Err("err message\n")
+	require.NotPanics(t, func() {
+		echo.Out("out message\n")
+		echo.Err("err message\n")
+	})
 }

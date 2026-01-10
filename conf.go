@@ -20,7 +20,7 @@ type Typed interface {
 	Type() reflect.Type
 }
 
-func ensureIsAssignableTo(r reflect.Type, l reflect.Type) {
+func ensureIsAssignableTo(r, l reflect.Type) {
 	if !r.AssignableTo(l) {
 		panic(fmt.Sprintf("type mismatch %s not assignable to %s", r, l))
 	}
