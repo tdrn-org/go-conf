@@ -4,8 +4,9 @@ name: release
 # The gate itself lives in tdrn-org/.github — this file only decides when to run
 # it and grants the permission it needs.
 #
-# dry-run stays true until the workflow has run once in this repository with the
-# expected result; set it to false afterwards to create real releases.
+# dry-run is false: the gate has been verified in go-conf on 2026-09-27 (it
+# returned the same verdict as the manual gate script). Set it back to true if a
+# repository needs another trial run before it releases on its own.
 
 on:
   workflow_run:
@@ -23,4 +24,4 @@ jobs:
     uses: tdrn-org/.github/.github/workflows/release-go-library.yml@main
     with:
       sha: ${{ github.event.workflow_run.head_sha || github.sha }}
-      dry-run: true
+      dry-run: false
